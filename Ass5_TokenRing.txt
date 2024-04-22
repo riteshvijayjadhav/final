@@ -1,0 +1,75 @@
+/*
+To run
+javac TokenRing.java
+java TokenRing
+*/
+
+import java.util.*;
+
+public class TokenRing {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Getting the number of nodes in the ring
+        System.out.print("Enter the number of nodes you want in the ring: ");
+        int n = sc.nextInt();
+
+        // Displaying the ring formation
+        System.out.println("Ring Formed is as below: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println("0");
+
+        int choice = 0;
+        do {
+            // Getting sender, receiver, and data
+            System.out.print("\nEnter Sender: ");
+            int sender = sc.nextInt();
+            System.out.print("Enter Receiver: ");
+            int receiver = sc.nextInt();
+            System.out.print("Enter Data to Send: ");
+            int data = sc.nextInt();
+            int token = 0;
+            int i = 0;
+            // Token Passing
+            for (i = token; i < sender; i++) {
+                System.out.print(" " + i + " ->");
+            }
+            System.out.println(" "+sender);
+            System.out.println("Sender:"+sender+"Sendind Data: "+data);
+            // Forwarding data until it reaches the receiver
+            for (i = sender; i != receiver; i = (i + 1) % n) {
+             System.out.println("Data: " + data+"Forwarded by: "+i);
+            }
+            System.out.println("Receiver: " + receiver + "Received the data: " + data);
+            token = sender;
+           
+            // Asking user if they want to send data again
+            System.out.print("\nDo you want to send data again? If yes Enter 1, If no Enter 0: ");
+            choice = sc.nextInt();
+        } while (choice == 1);
+
+    }
+}
+
+/*Output*/
+
+Enter the number of nodes you want in the ring: 8
+Ring Formed is as below: 
+0 1 2 3 4 5 6 7 0
+
+Enter Sender: 4  
+Enter Receiver: 2
+Enter Data to Send: 921
+ 0 -> 1 -> 2 -> 3 -> 4
+Sender:4Sendind Data: 921
+Data: 921Forwarded by: 4
+Data: 921Forwarded by: 5
+Data: 921Forwarded by: 6
+Data: 921Forwarded by: 7
+Data: 921Forwarded by: 0
+Data: 921Forwarded by: 1
+Receiver: 2Received the data: 921
+
+Do you want to send data again? If yes Enter 1, If no Enter 0:
